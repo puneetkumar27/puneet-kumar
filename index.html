@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Puneet — Software Developer Aspirant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0e1524;
+    --bg-alt:#141d33;
+    --panel:#161f38;
+    --ink:#e8ebf5;
+    --muted:#8d95b3;
+    --muted-2:#5d6688;
+    --accent:#f2a93b;      /* amber — signature accent */
+    --add:#4fd68c;         /* diff-add green, used sparingly for "+skills" */
+    --line:rgba(232,235,245,0.10);
+    --line-strong:rgba(232,235,245,0.18);
+    --radius:10px;
+    --maxw:920px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--accent); color:#12172a; }
+
+  h1,h2,h3{ font-family:'Space Grotesk', sans-serif; letter-spacing:-0.01em; }
+  .mono{ font-family:'JetBrains Mono', monospace; }
+  a{ color:inherit; text-decoration:none; }
+
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:rgba(14,21,36,0.85); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:64px; }
+  .brand{ font-family:'JetBrains Mono', monospace; font-weight:600; font-size:15px; color:var(--ink); }
+  .brand span{ color:var(--accent); }
+  .navlinks{ display:flex; gap:28px; font-size:14px; color:var(--muted); }
+  .navlinks a{ transition:color .2s; }
+  .navlinks a:hover{ color:var(--accent); }
+  .nav-toggle{ display:none; background:none; border:none; color:var(--ink); font-size:22px; cursor:pointer; }
+
+  @media (max-width:640px){
+    .navlinks{
+      position:absolute; top:64px; left:0; right:0;
+      flex-direction:column; background:var(--bg-alt);
+      padding:16px 24px; gap:16px; border-bottom:1px solid var(--line);
+      display:none;
+    }
+    .navlinks.open{ display:flex; }
+    .nav-toggle{ display:block; }
+  }
+
+  section{ padding:96px 0; border-bottom:1px solid var(--line); }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--accent);
+    letter-spacing:0.06em; margin-bottom:14px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{ content:'//'; color:var(--muted-2); }
+
+  /* ---------- HERO ---------- */
+  #hero{
+    padding-top:150px; border-bottom:1px solid var(--line);
+    background:
+      radial-gradient(600px 300px at 85% -10%, rgba(242,169,59,0.10), transparent 60%),
+      radial-gradient(500px 260px at -10% 10%, rgba(79,214,140,0.06), transparent 60%);
+  }
+  .hero-grid{ display:grid; grid-template-columns:1.15fr 0.85fr; gap:56px; align-items:center; }
+  @media (max-width:800px){ .hero-grid{ grid-template-columns:1fr; gap:40px; } }
+
+  .terminal{
+    background:var(--panel); border:1px solid var(--line-strong); border-radius:var(--radius);
+    overflow:hidden; box-shadow:0 30px 60px -30px rgba(0,0,0,0.6);
+  }
+  .terminal-bar{
+    display:flex; align-items:center; gap:8px; padding:11px 14px; background:var(--bg-alt);
+    border-bottom:1px solid var(--line);
+  }
+  .dot{ width:10px; height:10px; border-radius:50%; }
+  .dot.r{ background:#f5675a; } .dot.y{ background:#f2b84b; } .dot.g{ background:#3fc776; }
+  .terminal-title{ margin-left:8px; font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--muted); }
+  .terminal-body{ padding:22px 20px 26px; font-family:'JetBrains Mono', monospace; font-size:14px; }
+  .terminal-body .prompt{ color:var(--add); }
+  .terminal-body .cmd{ color:var(--ink); }
+  .terminal-body .out{ color:var(--muted); margin:4px 0 14px 0; }
+  .terminal-body .out b{ color:var(--ink); font-weight:600; }
+  .cursor{
+    display:inline-block; width:8px; height:16px; background:var(--accent);
+    vertical-align:middle; margin-left:2px; animation:blink 1s step-end infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  h1.name{ font-size:clamp(38px,6vw,56px); font-weight:700; line-height:1.05; margin:22px 0 10px; }
+  .role{ font-size:18px; color:var(--muted); max-width:520px; }
+  .role b{ color:var(--ink); font-weight:600; }
+
+  .cta-row{ display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
+  .btn{
+    font-family:'JetBrains Mono', monospace; font-size:13.5px; padding:11px 18px; border-radius:8px;
+    border:1px solid var(--line-strong); transition:all .2s; display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn.primary{ background:var(--accent); color:#14192a; border-color:var(--accent); font-weight:600; }
+  .btn.primary:hover{ background:#ffbb54; }
+  .btn.ghost{ color:var(--ink); }
+  .btn.ghost:hover{ border-color:var(--accent); color:var(--accent); }
+
+  .photo-frame{
+    position:relative; border-radius:var(--radius); overflow:hidden;
+    border:1px solid var(--line-strong); background:var(--panel);
+    aspect-ratio:4/5;
+  }
+  .photo-frame img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .photo-tag{
+    position:absolute; bottom:14px; left:14px; background:rgba(14,21,36,0.85);
+    border:1px solid var(--line-strong); border-radius:6px; padding:6px 10px;
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; color:var(--add);
+    backdrop-filter:blur(6px);
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-card{
+    background:var(--panel); border:1px solid var(--line-strong); border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .file-tab{
+    display:flex; align-items:center; gap:10px; padding:12px 18px; background:var(--bg-alt);
+    border-bottom:1px solid var(--line); font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--muted);
+  }
+  .file-tab .filename{ color:var(--ink); }
+  .about-body{ padding:26px 24px; font-size:16px; color:var(--muted); }
+  .about-body p{ margin-bottom:14px; }
+  .about-body p:last-child{ margin-bottom:0; }
+  .about-body b{ color:var(--ink); font-weight:600; }
+
+  .meta-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:22px; }
+  @media (max-width:600px){ .meta-grid{ grid-template-columns:1fr; } }
+  .meta-item{
+    border:1px solid var(--line); border-radius:8px; padding:14px 16px;
+  }
+  .meta-item .k{ font-family:'JetBrains Mono', monospace; font-size:11.5px; color:var(--muted-2); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:5px; }
+  .meta-item .v{ font-size:14.5px; color:var(--ink); }
+
+  /* ---------- SKILLS ---------- */
+  .skill-row{ display:flex; flex-wrap:wrap; gap:10px; }
+  .chip{
+    font-family:'JetBrains Mono', monospace; font-size:13.5px; padding:9px 14px;
+    border:1px solid var(--line-strong); border-radius:7px; background:var(--panel);
+    color:var(--ink); display:inline-flex; align-items:center; gap:7px;
+    transition:transform .15s, border-color .15s;
+  }
+  .chip:hover{ transform:translateY(-2px); border-color:var(--add); }
+  .chip .plus{ color:var(--add); font-weight:600; }
+
+  /* ---------- PROJECTS (repo cards) ---------- */
+  .repo-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+  @media (max-width:700px){ .repo-grid{ grid-template-columns:1fr; } }
+  .repo-card{
+    background:var(--panel); border:1px solid var(--line-strong); border-radius:var(--radius);
+    padding:20px; transition:transform .2s, border-color .2s, box-shadow .2s;
+  }
+  .repo-card:hover{ transform:translateY(-3px); border-color:var(--accent); box-shadow:0 20px 40px -24px rgba(242,169,59,0.35); }
+  .repo-head{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .repo-icon{ color:var(--muted-2); font-size:16px; }
+  .repo-name{ font-family:'JetBrains Mono', monospace; font-weight:600; font-size:15.5px; color:var(--ink); }
+  .repo-desc{ font-size:14.5px; color:var(--muted); margin-bottom:16px; min-height:44px; }
+  .repo-tags{ display:flex; flex-wrap:wrap; gap:7px; margin-bottom:14px; }
+  .repo-tags span{
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; padding:4px 9px;
+    border-radius:20px; border:1px solid var(--line); color:var(--muted);
+  }
+  .repo-link{ font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--accent); display:inline-flex; align-items:center; gap:6px; }
+  .repo-link:hover{ text-decoration:underline; }
+
+  .add-card{
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    border:1.5px dashed var(--line-strong); border-radius:var(--radius); padding:24px;
+    color:var(--muted-2); font-family:'JetBrains Mono', monospace; font-size:13px;
+  }
+
+  /* ---------- CERTIFICATIONS (commit log) ---------- */
+  .commit-log{ border-left:1px solid var(--line-strong); margin-left:6px; }
+  .commit{ position:relative; padding:0 0 26px 28px; }
+  .commit:last-child{ padding-bottom:0; }
+  .commit::before{
+    content:''; position:absolute; left:-5.5px; top:4px; width:10px; height:10px;
+    border-radius:50%; background:var(--accent); border:2px solid var(--bg);
+  }
+  .commit-hash{ font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--add); }
+  .commit-msg{ font-size:15.5px; color:var(--ink); font-weight:600; margin:4px 0 4px; }
+  .commit-meta{ font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--muted-2); }
+
+  /* ---------- CONTACT ---------- */
+  #contact{ border-bottom:none; padding-bottom:64px; }
+  .contact-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:24px; }
+  @media (max-width:700px){ .contact-grid{ grid-template-columns:1fr; } }
+  .contact-card{
+    border:1px solid var(--line-strong); border-radius:var(--radius); padding:20px;
+    background:var(--panel); transition:border-color .2s, transform .2s;
+  }
+  .contact-card:hover{ border-color:var(--accent); transform:translateY(-2px); }
+  .contact-card .k{ font-family:'JetBrains Mono', monospace; font-size:11.5px; color:var(--muted-2); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px; }
+  .contact-card .v{ font-size:14.5px; color:var(--ink); word-break:break-word; }
+
+  footer{ padding:28px 0 40px; text-align:center; font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--muted-2); }
+  footer .blink{ color:var(--accent); }
+
+  /* reveal on scroll */
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .reveal{ opacity:1; transform:none; transition:none; }
+    .cursor{ animation:none; }
+  }
+
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">puneet<span>.dev</span></div>
+    <div class="navlinks" id="navlinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<section id="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="terminal">
+        <div class="terminal-bar">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="terminal-title">puneet@devbox: ~</span>
+        </div>
+        <div class="terminal-body">
+          <div><span class="prompt">puneet@devbox</span><span class="cmd">:~$ whoami</span></div>
+          <div class="out">MCA fresher building toward a career in software &amp; <b>AI/ML</b> engineering.</div>
+          <div><span class="prompt">puneet@devbox</span><span class="cmd">:~$ status</span></div>
+          <div class="out">Open to internship &amp; entry-level opportunities<span class="cursor"></span></div>
+        </div>
+      </div>
+
+      <h1 class="name">Puneet</h1>
+      <p class="role">
+        <b>Software Developer Aspirant</b> — MCA Fresher exploring
+        Python, Java, C/C++ and Generative AI, one project at a time.
+      </p>
+
+      <div class="cta-row">
+        <a class="btn primary" href="mailto:harshitshukla67287@gmail.com">Email me</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/puneet-kumar-1b8a11388" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn ghost" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+
+    <div class="photo-frame">
+      <img src="puneet.jpg" alt="Puneet">
+      <div class="photo-tag mono">● available</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="wrap reveal">
+    <div class="eyebrow">about</div>
+    <div class="about-card">
+      <div class="file-tab"><span>📄</span> <span class="filename">README.md</span></div>
+      <div class="about-body">
+        <p>
+          Hello! I am <b>Puneet Kumar</b>, an MCA fresher passionate about software development,
+          programming, AI &amp; Machine Learning. I enjoy building practical projects and learning
+          new technology.
+        </p>
+        <p>
+          My goal is to become a <b>software engineer</b> and build AI-powered applications that
+          solve real-world problems.
+        </p>
+
+        <div class="meta-grid">
+          <div class="meta-item"><div class="k">Education</div><div class="v">MCA, Galgotias University (2025–2027)</div></div>
+          <div class="meta-item"><div class="k">Location</div><div class="v">Greater Noida, Gautam Buddh Nagar</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills">
+  <div class="wrap reveal">
+    <div class="eyebrow">skills</div>
+    <h2 style="font-size:26px; margin-bottom:20px;">Tech I work with</h2>
+    <div class="skill-row">
+      <span class="chip"><span class="plus">+</span>Python</span>
+      <span class="chip"><span class="plus">+</span>Machine Learning</span>
+      <span class="chip"><span class="plus">+</span>Generative AI</span>
+      <span class="chip"><span class="plus">+</span>Java</span>
+      <span class="chip"><span class="plus">+</span>C</span>
+      <span class="chip"><span class="plus">+</span>C++</span>
+      <span class="chip"><span class="plus">+</span>HTML &amp; CSS</span>
+      <span class="chip"><span class="plus">+</span>SQL / MySQL</span>
+      <span class="chip"><span class="plus">+</span>Git &amp; GitHub</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects">
+  <div class="wrap reveal">
+    <div class="eyebrow">projects</div>
+    <h2 style="font-size:26px; margin-bottom:6px;">Repositories</h2>
+    <p style="color:var(--muted); margin-bottom:26px; font-size:14.5px;">
+      Sample cards below — replace with your real projects. Each card is one block; copy–paste
+      a block to add more (see comments in the HTML file).
+    </p>
+
+    <div class="repo-grid">
+
+      <!-- ===== COPY FROM HERE TO ADD A NEW PROJECT CARD ===== -->
+      <div class="repo-card">
+        <div class="repo-head">
+          <span class="repo-icon">⌁</span>
+          <span class="repo-name">project-name-one</span>
+        </div>
+        <div class="repo-desc">One or two lines describing what this project does and the problem it solves.</div>
+        <div class="repo-tags">
+          <span>Python</span><span>Machine Learning</span>
+        </div>
+        <a class="repo-link" href="#" target="_blank" rel="noopener">View on GitHub →</a>
+      </div>
+      <!-- ===== COPY UP TO HERE ===== -->
+
+      <div class="repo-card">
+        <div class="repo-head">
+          <span class="repo-icon">⌁</span>
+          <span class="repo-name">project-name-two</span>
+        </div>
+        <div class="repo-desc">One or two lines describing what this project does and the problem it solves.</div>
+        <div class="repo-tags">
+          <span>Java</span><span>SQL</span>
+        </div>
+        <a class="repo-link" href="#" target="_blank" rel="noopener">View on GitHub →</a>
+      </div>
+
+      <div class="repo-card">
+        <div class="repo-head">
+          <span class="repo-icon">⌁</span>
+          <span class="repo-name">project-name-three</span>
+        </div>
+        <div class="repo-desc">One or two lines describing what this project does and the problem it solves.</div>
+        <div class="repo-tags">
+          <span>Generative AI</span><span>Python</span>
+        </div>
+        <a class="repo-link" href="#" target="_blank" rel="noopener">View on GitHub →</a>
+      </div>
+
+      <div class="add-card">+ add your next project here</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CERTIFICATIONS ================= -->
+<section id="certifications">
+  <div class="wrap reveal">
+    <div class="eyebrow">certifications</div>
+    <h2 style="font-size:26px; margin-bottom:6px;">Commit log</h2>
+    <p style="color:var(--muted); margin-bottom:30px; font-size:14.5px;">
+      Sample entries below — replace with your real certificates. Copy one <span class="mono">.commit</span> block to add more.
+    </p>
+
+    <div class="commit-log">
+
+      <!-- ===== COPY FROM HERE TO ADD A NEW CERTIFICATE ===== -->
+      <div class="commit">
+        <div class="commit-hash">#a3f9c1</div>
+        <div class="commit-msg">Certificate Name Goes Here</div>
+        <div class="commit-meta">Issued by Platform Name · Month Year</div>
+      </div>
+      <!-- ===== COPY UP TO HERE ===== -->
+
+      <div class="commit">
+        <div class="commit-hash">#c71b0e</div>
+        <div class="commit-msg">Certificate Name Goes Here</div>
+        <div class="commit-meta">Issued by Platform Name · Month Year</div>
+      </div>
+
+      <div class="commit">
+        <div class="commit-hash">#8e2d4f</div>
+        <div class="commit-msg">Certificate Name Goes Here</div>
+        <div class="commit-meta">Issued by Platform Name · Month Year</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="wrap reveal">
+    <div class="eyebrow">contact</div>
+    <h2 style="font-size:26px; margin-bottom:6px;">Let's connect</h2>
+    <p style="color:var(--muted); font-size:14.5px;">Open to internships and entry-level software / AI-ML roles.</p>
+
+    <div class="contact-grid">
+      <a class="contact-card" href="mailto:harshitshukla67287@gmail.com">
+        <div class="k">Email</div>
+        <div class="v">harshitshukla67287@gmail.com</div>
+      </a>
+      <a class="contact-card" href="https://www.linkedin.com/in/puneet-kumar-1b8a11388" target="_blank" rel="noopener">
+        <div class="k">LinkedIn</div>
+        <div class="v">/in/puneet-kumar-1b8a11388</div>
+      </a>
+      <a class="contact-card" href="https://github.com/" target="_blank" rel="noopener">
+        <div class="k">GitHub</div>
+        <div class="v">github.com/your-username</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  puneet@devbox:~$ <span class="blink">_</span> thanks for scrolling
+</footer>
+
+<script>
+  // mobile nav toggle
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navlinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
