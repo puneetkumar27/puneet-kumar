@@ -155,13 +155,19 @@
   /* ---------- SKILLS ---------- */
   .skill-row{ display:flex; flex-wrap:wrap; gap:10px; }
   .chip{
-    font-family:'JetBrains Mono', monospace; font-size:13.5px; padding:9px 14px;
+    font-family:'JetBrains Mono', monospace; font-size:13.5px; padding:8px 14px 8px 8px;
     border:1px solid var(--line-strong); border-radius:7px; background:var(--panel);
-    color:var(--ink); display:inline-flex; align-items:center; gap:7px;
+    color:var(--ink); display:inline-flex; align-items:center; gap:9px;
     transition:transform .15s, border-color .15s;
   }
   .chip:hover{ transform:translateY(-2px); border-color:var(--add); }
   .chip .plus{ color:var(--add); font-weight:600; }
+  .chip-logo{
+    width:22px; height:22px; border-radius:6px; background:#fff;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0; padding:3px;
+  }
+  .chip-logo img{ width:100%; height:100%; object-fit:contain; display:block; }
+  .chip-logo.custom{ background:transparent; padding:0; width:20px; height:20px; }
 
   /* ---------- PROJECTS (repo cards) ---------- */
   .repo-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
@@ -203,8 +209,9 @@
 
   /* ---------- CONTACT ---------- */
   #contact{ border-bottom:none; padding-bottom:64px; }
-  .contact-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:24px; }
-  @media (max-width:700px){ .contact-grid{ grid-template-columns:1fr; } }
+  .contact-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:24px; }
+  @media (max-width:800px){ .contact-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:480px){ .contact-grid{ grid-template-columns:1fr; } }
   .contact-card{
     border:1px solid var(--line-strong); border-radius:var(--radius); padding:20px;
     background:var(--panel); transition:border-color .2s, transform .2s;
@@ -236,9 +243,11 @@
     <div class="brand">puneet<span>.dev</span></div>
     <div class="navlinks" id="navlinks">
       <a href="#about">About</a>
+      <a href="#experience">Experience</a>
       <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
       <a href="#certifications">Certifications</a>
+      <a href="#achievements">Achievements</a>
       <a href="#contact">Contact</a>
     </div>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
@@ -270,8 +279,9 @@
 
       <div class="cta-row">
         <a class="btn primary" href="mailto:harshitshukla67287@gmail.com">Email me</a>
+        <a class="btn ghost" href="Puneet_Kumar_Resume.pdf" target="_blank" rel="noopener">Resume</a>
         <a class="btn ghost" href="https://www.linkedin.com/in/puneet-kumar-1b8a11388" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn ghost" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn ghost" href="https://github.com/puneetkumar" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
 
@@ -308,21 +318,103 @@
   </div>
 </section>
 
+<!-- ================= EXPERIENCE ================= -->
+<section id="experience">
+  <div class="wrap reveal">
+    <div class="eyebrow">experience</div>
+    <h2 style="font-size:26px; margin-bottom:20px;">Internships</h2>
+    <div class="repo-grid">
+      <div class="repo-card">
+        <div class="repo-head">
+          <span class="repo-icon">⌁</span>
+          <span class="repo-name">Web Development Intern</span>
+        </div>
+        <div class="repo-desc">Zidio Development · Bengaluru, Karnataka (Remote) — 3 months</div>
+        <div class="repo-tags">
+          <span>HTML &amp; CSS</span><span>Web Development</span>
+        </div>
+        <a class="repo-link" href="certs/zidio-internship-offer.jpg" target="_blank" rel="noopener">View offer letter →</a>
+      </div>
+
+      <div class="repo-card">
+        <div class="repo-head">
+          <span class="repo-icon">⌁</span>
+          <span class="repo-name">Java Full Stack Development Virtual Internship</span>
+        </div>
+        <div class="repo-desc">AICTE × EduSkills Academy — 8-week virtual internship with project · June–Aug 2026 · Grade: Outstanding</div>
+        <div class="repo-tags">
+          <span>Java</span><span>Full Stack</span>
+        </div>
+        <a class="repo-link" href="certs/eduskills-java-fullstack-internship.pdf" target="_blank" rel="noopener">View certificate →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= SKILLS ================= -->
 <section id="skills">
   <div class="wrap reveal">
     <div class="eyebrow">skills</div>
     <h2 style="font-size:26px; margin-bottom:20px;">Tech I work with</h2>
     <div class="skill-row">
-      <span class="chip"><span class="plus">+</span>Python</span>
-      <span class="chip"><span class="plus">+</span>Machine Learning</span>
-      <span class="chip"><span class="plus">+</span>Generative AI</span>
-      <span class="chip"><span class="plus">+</span>Java</span>
-      <span class="chip"><span class="plus">+</span>C</span>
-      <span class="chip"><span class="plus">+</span>C++</span>
-      <span class="chip"><span class="plus">+</span>HTML &amp; CSS</span>
-      <span class="chip"><span class="plus">+</span>SQL / MySQL</span>
-      <span class="chip"><span class="plus">+</span>Git &amp; GitHub</span>
+      <span class="chip">
+        <span class="chip-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt=""></span>
+        Python
+      </span>
+      <span class="chip">
+        <span class="chip-logo custom">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="5" cy="6" r="2.4" fill="#F2A93B"/>
+            <circle cx="19" cy="6" r="2.4" fill="#F2A93B"/>
+            <circle cx="12" cy="13" r="2.6" fill="#F2A93B"/>
+            <circle cx="5" cy="19" r="2.4" fill="#F2A93B"/>
+            <circle cx="19" cy="19" r="2.4" fill="#F2A93B"/>
+            <path d="M6.8 7.3L10 11.4M17.2 7.3L14 11.4M10.3 15L6.7 17.7M13.7 15L17.3 17.7" stroke="#F2A93B" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+        </span>
+        Machine Learning
+      </span>
+      <span class="chip">
+        <span class="chip-logo custom">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2.5L13.6 8.9L20 10.5L13.6 12.1L12 18.5L10.4 12.1L4 10.5L10.4 8.9L12 2.5Z" fill="#5FD0C0"/>
+            <path d="M19 15L19.7 17.3L22 18L19.7 18.7L19 21L18.3 18.7L16 18L18.3 17.3L19 15Z" fill="#5FD0C0"/>
+          </svg>
+        </span>
+        Generative AI
+      </span>
+      <span class="chip">
+        <span class="chip-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt=""></span>
+        Java
+      </span>
+      <span class="chip">
+        <span class="chip-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg" alt=""></span>
+        C
+      </span>
+      <span class="chip">
+        <span class="chip-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" alt=""></span>
+        C++
+      </span>
+      <span class="chip">
+        <span class="chip-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt=""></span>
+        HTML
+      </span>
+      <span class="chip">
+        <span class="chip-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt=""></span>
+        CSS
+      </span>
+      <span class="chip">
+        <span class="chip-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" alt=""></span>
+        SQL / MySQL
+      </span>
+      <span class="chip">
+        <span class="chip-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt=""></span>
+        Git
+      </span>
+      <span class="chip">
+        <span class="chip-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt=""></span>
+        GitHub
+      </span>
     </div>
   </div>
 </section>
@@ -343,11 +435,11 @@
       <div class="repo-card">
         <div class="repo-head">
           <span class="repo-icon">⌁</span>
-          <span class="repo-name">project-name-one</span>
+          <span class="repo-name">book-recommendation-system</span>
         </div>
-        <div class="repo-desc">One or two lines describing what this project does and the problem it solves.</div>
+        <div class="repo-desc">Book Recommendation System built in Python using collaborative and content-based filtering, with a Streamlit/Flask interface for real-time book search and discovery.</div>
         <div class="repo-tags">
-          <span>Python</span><span>Machine Learning</span>
+          <span>Python</span><span>Pandas</span><span>NumPy</span><span>Streamlit</span><span>Plotly</span><span>Seaborn</span><span>Matplotlib</span>
         </div>
         <a class="repo-link" href="#" target="_blank" rel="noopener">View on GitHub →</a>
       </div>
@@ -402,17 +494,115 @@
       <!-- ===== COPY UP TO HERE ===== -->
 
       <div class="commit">
+        <div class="commit-hash">#7d41ab</div>
+        <div class="commit-msg"><a href="certs/cybersecurity-job-simulation.pdf" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">Cybersecurity Job Simulation</a></div>
+        <div class="commit-meta">Mastercard × Forage · June 2026</div>
+      </div>
+
+      <div class="commit">
+        <div class="commit-hash">#5f9c22</div>
+        <div class="commit-msg"><a href="certs/intro-to-ai.pdf" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">Introduction to Artificial Intelligence</a></div>
+        <div class="commit-meta">Online Certification · June 2026</div>
+      </div>
+
+      <div class="commit">
         <div class="commit-hash">#c71b0e</div>
-        <div class="commit-msg">Certificate Name Goes Here</div>
-        <div class="commit-meta">Issued by Platform Name · Month Year</div>
+        <div class="commit-msg">Introduction to MS Excel</div>
+        <div class="commit-meta">Online Certification · June 2026</div>
       </div>
 
       <div class="commit">
         <div class="commit-hash">#8e2d4f</div>
-        <div class="commit-msg">Certificate Name Goes Here</div>
-        <div class="commit-meta">Issued by Platform Name · Month Year</div>
+        <div class="commit-msg"><a href="certs/mybharat-women-freedom-movement.png" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">Quiz on Women in India's Freedom Movement</a></div>
+        <div class="commit-meta">MyBharat · Ministry of Youth Affairs &amp; Sports · June 2026</div>
       </div>
 
+      <div class="commit">
+        <div class="commit-hash">#2ab6f0</div>
+        <div class="commit-msg"><a href="certs/mybharat-nuclear-technology.png" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">Quiz on India's Success on Nuclear Technology</a></div>
+        <div class="commit-meta">MyBharat · Ministry of Youth Affairs &amp; Sports · June 2026</div>
+      </div>
+
+      <div class="commit">
+        <div class="commit-hash">#914dc7</div>
+        <div class="commit-msg"><a href="certs/mybharat-cpgrams-quiz.png" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">Public Grievance Redressal &amp; CPGRAMS Awareness Quiz</a></div>
+        <div class="commit-meta">MyBharat · Ministry of Youth Affairs &amp; Sports · June 2026</div>
+      </div>
+
+      <div class="commit">
+        <div class="commit-hash">#b038e5</div>
+        <div class="commit-msg"><a href="certs/mybharat-ocean-science.png" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">Ocean Science for Viksit Bharat Quiz</a></div>
+        <div class="commit-meta">MyBharat · Ministry of Youth Affairs &amp; Sports · June 2026</div>
+      </div>
+
+      <div class="commit">
+        <div class="commit-hash">#41f7a9</div>
+        <div class="commit-msg"><a href="https://verify.onwingspan.com" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">Low-Code No-Code</a></div>
+        <div class="commit-meta">Infosys Springboard · May 2026</div>
+      </div>
+
+      <div class="commit">
+        <div class="commit-hash">#d629c3</div>
+        <div class="commit-msg"><a href="certs/oracle-sql.jpg" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">Database Programming with SQL</a></div>
+        <div class="commit-meta">Oracle Academy · Galgotias University · June 2026</div>
+      </div>
+
+      <div class="commit">
+        <div class="commit-hash">#0a6b58</div>
+        <div class="commit-msg"><a href="certs/code360-os-track.jpg" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">Operating System Track</a></div>
+        <div class="commit-meta">Code360 by Coding Ninjas · July 2026</div>
+      </div>
+
+      <div class="commit">
+        <div class="commit-hash">#f38127</div>
+        <div class="commit-msg"><a href="https://www.credly.com/go/BPG9qCFw" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">AWS Academy Graduate — Machine Learning Foundations</a></div>
+        <div class="commit-meta">AWS Academy · 20 hrs · July 2026</div>
+      </div>
+
+      <div class="commit">
+        <div class="commit-hash">#9c04d6</div>
+        <div class="commit-msg"><a href="https://www.greylearn.com/verify/AG2791KUKO" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">Advance Excel</a></div>
+        <div class="commit-meta">GreyLearn · June 2026</div>
+      </div>
+
+      <div class="commit">
+        <div class="commit-hash">#5e83b1</div>
+        <div class="commit-msg"><a href="certs/galgotias-appreciation.jpg" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline;">Certificate of Appreciation — Student Placement Coordinator</a></div>
+        <div class="commit-meta">Galgotias University · AY 2025–26</div>
+      </div>
+
+      <div class="commit">
+        <div class="commit-hash">#3d7fe0</div>
+        <div class="commit-msg">NPTEL Online Certification</div>
+        <div class="commit-meta">SWAYAM</div>
+      </div>
+
+      <div class="commit">
+        <div class="commit-hash">#a92c68</div>
+        <div class="commit-msg">NISM Certification</div>
+        <div class="commit-meta">National Institute of Securities Markets</div>
+      </div>
+
+      <div class="commit">
+        <div class="commit-hash">#67e1fa</div>
+        <div class="commit-msg">Technical Writing</div>
+        <div class="commit-meta">Reliance Foundation</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACHIEVEMENTS ================= -->
+<section id="achievements">
+  <div class="wrap reveal">
+    <div class="eyebrow">achievements</div>
+    <h2 style="font-size:26px; margin-bottom:20px;">Highlights</h2>
+    <div class="meta-grid" style="grid-template-columns:1fr;">
+      <div class="meta-item">
+        <div class="k">AMCAT (SHL Assessment)</div>
+        <div class="v">Scored 304, demonstrating proficiency in logical reasoning and computer science fundamentals.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -429,13 +619,17 @@
         <div class="k">Email</div>
         <div class="v">harshitshukla67287@gmail.com</div>
       </a>
+      <a class="contact-card" href="tel:8858153335">
+        <div class="k">Phone</div>
+        <div class="v">8858153335</div>
+      </a>
       <a class="contact-card" href="https://www.linkedin.com/in/puneet-kumar-1b8a11388" target="_blank" rel="noopener">
         <div class="k">LinkedIn</div>
         <div class="v">/in/puneet-kumar-1b8a11388</div>
       </a>
-      <a class="contact-card" href="https://github.com/" target="_blank" rel="noopener">
+      <a class="contact-card" href="https://github.com/puneetkumar" target="_blank" rel="noopener">
         <div class="k">GitHub</div>
-        <div class="v">github.com/your-username</div>
+        <div class="v">github.com/puneetkumar</div>
       </a>
     </div>
   </div>
